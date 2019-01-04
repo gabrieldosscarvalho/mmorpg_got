@@ -7,7 +7,7 @@ var conexaoMongoDB = function(){
 		'got',
 		new mongo.Server(
 			'localhost', // string contendo o endereço do servidor
-			2707, // porta de conexão padrao
+			27017, // porta de conexão padrao
 			{}
 		),
 		{}

@@ -4,23 +4,25 @@ module.exports.cadastro = function( application, req, res ){
 };
 
 module.exports.cadastrar = function( application, req, res ){
-	let dadosForm = req.body;
+	var dadosForm = req.body;
 
 	req.assert('nome',		'Nome não pode ser vazio').notEmpty();
 	req.assert('usuario',	'Usuário não pode ser vazio').notEmpty();
 	req.assert('senha',		'Senha não pode ser vazio').notEmpty();
 	req.assert('casa',		'Casa não pode ser vazio').notEmpty();
 
-	let errosForm = req.validationErrors();
+	var errosForm = req.validationErrors();
 
 	if ( errosForm ) {
 		res.render('cadastro', {validacao: errosForm, dadosForm: dadosForm});
-		// console.log(errosForm);
-		// res.send(`Existem erros no formulário.<br><br>${errosForm.reduce(function(acc, value){
-		// 	return ( acc instanceof Object )? acc.msg : `${acc}<br>${value.msg}` ;
-		// })}`);
 		return;
 	}
+
+	var connection = application.config.dbConnection;
+
+	var UsuariosDAO = new application.app.models.UsuariosDAO( connection );
+
+	UsuariosDAO.inserirUsuario( dadosForm );
 
 	res.send("Podem cadastrar");
 };
