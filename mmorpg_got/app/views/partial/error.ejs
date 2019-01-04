@@ -1,0 +1,9 @@
+<% if( validacao.length ) {  %>
+	<div class="alert alert-danger">
+		<strong>Atenção!</strong>
+
+		<ul>
+			<%- validacao.reduce( (acc, value) => ( acc instanceof Object )? `<li>${acc.msg}</li>` : `${acc}<li>${value.msg}</li>`, validacao[0] ); %>
+		</ul>
+	</div>
+<% } %>

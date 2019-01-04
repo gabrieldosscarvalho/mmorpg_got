@@ -30,15 +30,8 @@
 		</nav>
 
 	    <div class="container">
-			<% if( validacao.length ) {  %>
-				<div class="alert alert-danger">
-					<strong>Atenção!</strong>
+			<% include partial/error.ejs %>
 
-					<ul>
-						<%- validacao.reduce( (acc, value) => ( acc instanceof Object )? `<li>${acc.msg}</li>` : `${acc}<li>${value.msg}</li>` ); %>
-					</ul>
-				</div>
-			<% } %>
 			<form class="form-cadastro" action="/cadastrar" method="post">
 			
 				<div class="row">
